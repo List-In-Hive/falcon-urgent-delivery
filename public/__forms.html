@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+  Netlify Forms registration file. Netlify reads this at deploy time to detect the forms.
+  Visitors never see it. Every field the site submits must be listed here, or Netlify drops it.
+  Keep it in sync with components/OrderForm.tsx and components/ContactForm.tsx.
+
+  order   = paid bookings (sent when the customer clicks Pay, before Stripe)
+  contact = Contact form (/contact), including the "Request a quote" topic
+  "email" makes Reply in the notification go to the customer; "subject" sets the notification subject line.
+-->
+<html lang="en">
+<head><meta charset="utf-8"><title>Forms</title><meta name="robots" content="noindex"></head>
+<body>
+  <form name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="order" />
+    <input name="bot-field" />
+    <input type="email" name="email" />
+    <input name="subject" />
+    <input name="order_id" />
+    <input name="request_type" />
+    <input name="price" />
+    <input name="payment_status" />
+    <input name="quote_reasons" />
+    <input name="item_type" />
+    <input name="speed" />
+    <input name="distance_band" />
+    <input name="item_count" />
+    <input name="after_hours" />
+    <input name="pickup_business" />
+    <input name="pickup_contact" />
+    <input name="pickup_phone" />
+    <input name="pickup_address" />
+    <input name="pickup_suite" />
+    <input name="pickup_city" />
+    <input name="pickup_zip" />
+    <input name="pickup_ready" />
+    <textarea name="pickup_notes"></textarea>
+    <input name="dropoff_business" />
+    <input name="dropoff_contact" />
+    <input name="dropoff_phone" />
+    <input name="dropoff_address" />
+    <input name="dropoff_suite" />
+    <input name="dropoff_city" />
+    <input name="dropoff_zip" />
+    <textarea name="dropoff_notes"></textarea>
+    <input name="item_description" />
+    <input name="declared_value" />
+    <input name="customer_name" />
+    <input name="customer_company" />
+    <input name="customer_email" />
+    <input name="customer_phone" />
+    <input name="no_prohibited_items" />
+    <input name="agree_terms" />
+  </form>
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact" />
+    <input name="bot-field" />
+    <input name="subject" />
+    <input name="name" />
+    <input name="company" />
+    <input type="email" name="email" />
+    <input name="phone" />
+    <input name="topic" />
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>
