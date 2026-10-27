@@ -12,17 +12,6 @@ export default function Header() {
   const [openOn, setOpenOn] = useState<string | null>(null);
   const open = openOn !== null && openOn === pathname;
 
-  if (pathname?.startsWith("/driver")) {
-    return (
-      <header className="bg-navy">
-        <div className="container-x flex h-16 items-center">
-          <img src="/brand/falcon-logo-reversed.svg" alt="Falcon Urgent Delivery" width={150} height={42} className="h-9 w-auto" />
-          <span className="ml-3 rounded bg-navy-3 px-2 py-0.5 text-sm font-semibold text-white/80">Driver</span>
-        </div>
-      </header>
-    );
-  }
-
   return (
     <header className="sticky top-0 z-40 bg-navy text-white">
       <div className="container-x flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">

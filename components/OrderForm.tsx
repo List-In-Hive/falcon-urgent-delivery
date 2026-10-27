@@ -184,7 +184,7 @@ export default function OrderForm() {
     for (const [k, msg] of REQUIRED_TEXT) if (!v(k)) e[k] = msg;
     for (const k of ["pickup_phone", "dropoff_phone", "customer_phone"]) if (!validPhone(v(k))) e[k] = "Enter a 10-digit phone number.";
     for (const k of ["pickup_zip", "dropoff_zip"]) if (!validZip(v(k))) e[k] = "Enter a 5-digit ZIP code.";
-    if (!EMAIL_RE.test(v("customer_email"))) e.customer_email = "Enter a valid email address. Your receipt and photo proof go here.";
+    if (!EMAIL_RE.test(v("customer_email"))) e.customer_email = "Enter a valid email address. Your receipt goes here.";
     if (speed === "sameDay" && !v("pickup_ready")) e.pickup_ready = "Choose when the item is ready for pickup.";
     if (declared.trim() !== "" && (!Number.isFinite(declaredValue) || (declaredValue as number) < 0)) e.declared_value = "Enter a dollar amount, or leave it empty.";
     if (!d.get("no_prohibited_items")) e.no_prohibited_items = "Confirm the item isn't on the prohibited list.";

@@ -102,7 +102,7 @@ export default function TermsPage() {
         </ul>
 
         <h2>11. Proof of delivery</h2>
-        <p>A delivery photo and the name of the person who received the item count as proof of delivery.</p>
+        <p>The delivery time and the name of the person who received the item count as proof of delivery.</p>
 
         <h2>12. Using our website</h2>
         <p>

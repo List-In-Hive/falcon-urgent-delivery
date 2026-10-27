@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Camera, Clock, ShieldCheck, Snowflake } from "lucide-react";
+import { Clock, ShieldCheck, Snowflake, Timer } from "lucide-react";
 import PriceWidget from "@/components/PriceWidget";
 import VanIllustration from "@/components/VanIllustration";
 import ServiceAreaMap from "@/components/ServiceAreaMap";
@@ -30,7 +30,7 @@ const trust = [
   { icon: ShieldCheck, label: "Licensed & insured" },
   { icon: Clock, label: "10 years of experience" },
   { icon: Snowflake, label: "Air-conditioned van" },
-  { icon: Camera, label: "Photo proof of delivery" },
+  { icon: Timer, label: "60–90 min rush delivery" },
 ];
 
 export default function Home() {

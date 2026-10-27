@@ -14,7 +14,7 @@ const promise = [
   { title: "On time", text: "The delivery window we give you is the one we keep." },
   { title: "Careful handling", text: "Documents, parts and medical supplies ride in a clean, air-conditioned van." },
   { title: "Clear, flat pricing", text: "You see the price before you book. No waiting-time fees." },
-  { title: "Proof of every delivery", text: "A photo, the time and the recipient's name, sent to your email." },
+  { title: "Same-day service", text: "Order by 2 PM and it's delivered by the end of the business day." },
 ];
 
 export default function AboutPage() {

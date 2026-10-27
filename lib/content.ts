@@ -11,7 +11,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Will my delivery arrive on time?",
-    a: "Yes. On-time delivery is the whole point of Falcon, and every delivery comes with photo proof.",
+    a: "Yes. On-time delivery is the whole point of Falcon.",
   },
   {
     q: "What can you deliver?",
@@ -30,10 +30,6 @@ export const faqs: { q: string; a: string }[] = [
     a: "Yes, including emergencies. Request a quote and we'll confirm the price.",
   },
   { q: "Do you charge for waiting time?", a: "No." },
-  {
-    q: "How do I know my item was delivered?",
-    a: "You get an email with a photo, the delivery time and the name of the person who received it.",
-  },
   {
     q: "Can I cancel?",
     a: "Yes. You get a full refund if you cancel before pickup. There's no refund after pickup.",

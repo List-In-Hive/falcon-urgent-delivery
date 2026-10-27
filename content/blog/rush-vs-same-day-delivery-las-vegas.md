@@ -67,4 +67,4 @@ For any of these, [send us a quote request](/contact?topic=quote) with the picku
 
 ## Booking takes a few minutes
 
-On the [booking page](/order), pick the item, speed and distance, fill in the pickup and drop-off details, and pay by card. You get an email when your item is picked up, and another when it's delivered, with a photo, the time and the name of the person who received it.
+On the [booking page](/order), pick the item, speed and distance, fill in the pickup and drop-off details, and pay by card.

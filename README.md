@@ -3,8 +3,7 @@
 Next.js site for Falcon Urgent Delivery (Las Vegas rush courier), built by Inspirovate Creatives.
 
 - **Pages:** Home, About, Services & Pricing, Testimonials, Blog, Contact (including quote requests), Order (price calculator, pay by Stripe payment link), Privacy Policy, Terms of Use, 404.
-- **Driver page:** `/driver`, PIN-protected and not indexed. The driver marks orders picked up and delivered, and the customer gets an email with a photo.
-- **Stack:** Next.js 16 (App Router, TypeScript), Tailwind CSS 4, Netlify Forms, Stripe Payment Links, Netlify Blobs, Resend.
+- **Stack:** Next.js 16 (App Router, TypeScript), Tailwind CSS 4, Netlify Forms, Stripe Payment Links.
 
 ## Run it locally
 
@@ -17,10 +16,7 @@ npm run dev                    # http://localhost:3000
 Locally, without Netlify:
 
 - **Forms:** submissions are logged in the browser console instead of sent.
-- **Orders and photos:** saved in `./.data/`, which git ignores.
-- **Emails:** skipped and logged in the terminal unless `RESEND_API_KEY` is set.
 - **Pay Now:** opens Falcon's live Stripe payment link for that price. Don't complete a payment while testing unless you mean to.
-- **Driver page:** set `DRIVER_PIN` and `DRIVER_SESSION_SECRET` in `.env.local` to try it.
 
 Other commands: `npm run build` (production build, runs the blog manifest first), `npm run lint` and `npm run typecheck`.
 
@@ -51,30 +47,13 @@ Netlify ignores form attributes inside Next.js pages. Forms are registered by th
 Payments use Stripe Payment Links from Falcon's own Stripe account. There are no Stripe keys in the website or in Netlify.
 
 - **6 links, one per price** ($39, $49, $59, $69, $79, $89), all named "Courier Delivery". They are in `lib/payment-links.ts`. The build fails if any price in `lib/pricing.ts` has no link.
-- `/api/checkout` recalculates the price on the server, saves the order and returns the link for that price. The browser's price is display only.
+- `/api/checkout` recalculates the price on the server, creates the Order ID and returns the link for that price. The browser's price is display only.
 - The link opens with the customer's email filled in and the Order ID attached as `client_reference_id`.
 - In each link's settings, **After the payment** redirects to `https://www.falconurgentdelivery.com/order/success`. That page thanks the customer and shows their Order ID.
 - **Dispatch rule:** the Netlify "order" email arrives first, with status "awaiting payment". Dispatch only after Stripe's payment email, matched by the customer's email and the amount.
 - **New price?** Falcon creates a link in Stripe; add it to `lib/payment-links.ts`.
-- **Quotes:** Falcon makes a one-time payment link per quote in the Stripe Dashboard. After it's paid, create a manual order on `/driver` so the customer still gets photo proof.
+- **Quotes:** Falcon makes a one-time payment link per quote in the Stripe Dashboard.
 - In the Stripe Dashboard, turn on customer receipts for successful payments and refunds, and email notifications for successful payments.
-
-## Proof-of-delivery emails (Resend)
-
-1. Create a Resend account and add the domain `falconurgentdelivery.com`.
-2. Add the SPF and DKIM DNS records Resend shows. The client manages DNS.
-3. Set `RESEND_API_KEY`, `EMAIL_FROM` and `EMAIL_COPY_TO` in Netlify.
-
-The customer gets a "Picked up" email and a "Delivered" email with the photo. A copy goes to `EMAIL_COPY_TO`.
-
-## Driver page (`/driver`)
-
-1. Sign in with the PIN. The session lasts 12 hours.
-2. Paste the Order ID from the order email and tap **Mark picked up**.
-3. At drop-off, take a photo, enter who received it, and tap **Mark delivered and email proof**. The photo is compressed on the phone before upload.
-4. **New manual order** creates an Order ID for quotes paid by payment link.
-
-Orders and photos are stored in Netlify Blobs (stores `orders` and `photos`).
 
 ## Blog
 
@@ -146,10 +125,8 @@ The Testimonials section stays hidden on the home page until a quote is added. E
 - [x] Testimonial quotes from Arman, Luis and Rebecca (in `lib/content.ts`; confirm each person approved the wording)
 - [ ] Whether lab specimens are accepted: "hazardous materials" is prohibited, so the Terms need a clear exception if they are
 - [x] Client's Stripe account and the 6 payment links (in `lib/payment-links.ts`)
-- [ ] Resend account, plus SPF and DKIM records on the domain
 - [x] Domain DNS pointed to Netlify (GoDaddy)
 - [ ] SSL certificate for falconurgentdelivery.com and www (Netlify: Domain management > HTTPS)
-- [ ] Driver PIN, and a random `DRIVER_SESSION_SECRET`
 - [ ] Client approval of the policies and an attorney review of the Privacy Policy and Terms of Use
 - [ ] Owner bio wording on the About page
 
@@ -158,10 +135,8 @@ The Testimonials section stays hidden on the home page until a quote is added. E
 ```text
 app/                pages, API routes (app/api), sitemap, robots, manifest, icons, fonts
   api/checkout      server pricing, Order ID, picks the Stripe payment link
-  api/driver/*      driver login, order lookup, picked up / delivered, manual orders
-  api/photo/[id]    delivery photos for the emails
-components/         header, footer, price widget, order form, driver app, page sections
-lib/                pricing, payment links, validation, storage (Blobs with local fallback), email, site copy,
+components/         header, footer, price widget, order form, page sections
+lib/                pricing, payment links, validation, site copy,
                     blog loader (blog.ts), publication hash (publication.ts), canonical origin (origin.ts)
 content/blog/       blog articles (Markdown)
 scripts/            publication-manifest.ts (runs before every build)

@@ -1,7 +1,7 @@
 ---
 title: "Same-Day Legal Document Delivery in Las Vegas: A Checklist"
 slug: "legal-document-delivery-las-vegas"
-description: "How Las Vegas law offices, title and escrow teams can get signed documents across town today, with photo proof of delivery and no waiting fees."
+description: "How Las Vegas law offices, title and escrow teams can get signed documents across town today, with no waiting fees."
 publishedAt: "2026-10-13T16:00:00Z"
 status: "published"
 coverImage: "/images/blog-legal-documents.webp"
@@ -17,17 +17,6 @@ When a signature is the last thing standing between a deal and a deadline, the d
 3. **Pick the right speed.** Rush is picked up and delivered within 60 to 90 minutes. Same Day costs less if you order by 2 PM and it can arrive by the end of the business day.
 4. **Check the distance.** Prices are based on driving miles from pickup to drop-off: up to 7.5 miles, 7.5 to 15, or 15 to 25.
 5. **Think about value.** Every delivery is covered up to $100. If the contents are worth more, ask for a quote so a higher declared value can be arranged in advance.
-
-## What proof you get
-
-Knowing a document arrived matters as much as getting it there. With every Falcon delivery you receive two emails:
-
-- one when the envelope is **picked up**, and
-- one when it's **delivered**, with a **photo**, the **delivery time** and the **name of the person who received it**.
-
-![Phone screen showing a delivered envelope with a green check mark, next to the Falcon logo](/images/blog-proof-of-delivery.webp)
-
-Keep that email with the file. It answers the "did they get it?" question in seconds.
 
 ## Rush or Same Day for legal work?
 

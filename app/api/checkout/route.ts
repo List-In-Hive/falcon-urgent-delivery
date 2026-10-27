@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { paymentLinkFor } from "@/lib/payment-links";
-import { saveOrder } from "@/lib/store";
 import { newOrderId } from "@/lib/order-id";
 import {
   isDistance,
@@ -11,7 +10,6 @@ import {
   type ItemCount,
 } from "@/lib/pricing";
 import { EMAIL_RE, checkAddress, clean, readAddress, validPhone } from "@/lib/validate";
-import type { Order } from "@/lib/order-types";
 
 export const runtime = "nodejs";
 
@@ -69,37 +67,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Check the fields marked in red.", fields }, { status: 400 });
   }
 
-  const order: Order = {
-    id: newOrderId(),
-    createdAt: new Date().toISOString(),
-    source: "online",
-    status: "awaiting_payment",
-    paid: false,
-    item,
-    speed,
-    distance,
-    price,
-    pickupReady,
-    pickup,
-    dropoff,
-    itemDescription,
-    declaredValue: input.declaredValue,
-    customer,
-  };
-
-  const url = paymentLinkFor(price, order.id, customer.email);
+  const orderId = newOrderId();
+  const url = paymentLinkFor(price, orderId, customer.email);
   if (!url) {
     return NextResponse.json(
       { error: "Online payment isn't available for this price yet. Request a quote instead and we'll email you a payment link." },
       { status: 503 },
     );
   }
-
-  try {
-    await saveOrder(order);
-    return NextResponse.json({ orderId: order.id, url, price });
-  } catch (err) {
-    console.error("Saving the order failed", err);
-    return NextResponse.json({ error: "Payment couldn't start. Try again in a moment." }, { status: 502 });
-  }
+  return NextResponse.json({ orderId, url, price });
 }

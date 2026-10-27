@@ -42,8 +42,6 @@ Choose **Rush** when the car is on the lift and the technician is waiting. Choos
 3. **Name the counter contact.** Add the parts counter's contact name and phone number for pickup, and the person receiving at your shop.
 4. **Add receiving instructions.** Note the service entrance, receiving door or gate code in the instructions field.
 
-You'll get an email when the part is picked up and another when it's delivered, with a photo, the time and the name of the person who received it.
-
 ## Heavy, bulky or several parts
 
 These are priced by quote:

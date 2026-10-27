@@ -22,8 +22,7 @@ export default function SuccessPage() {
           <li>
             <NextStepLine />
           </li>
-          <li>You&apos;ll get an email when the item is picked up.</li>
-          <li>When it&apos;s delivered, you&apos;ll get a photo, the time and the recipient&apos;s name.</li>
+          <li>Your item goes straight to the recipient at the drop-off address.</li>
         </ol>
         <p className="mt-4 text-slate">
           Stripe has emailed your receipt. Need to change something? Email{" "}

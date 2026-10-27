@@ -117,7 +117,7 @@ export function Industries({ detailed = false }: { detailed?: boolean }) {
 const steps = [
   { title: "Get your price and book", text: "Pick the item, speed and distance. See the price and pay online, or request a quote." },
   { title: "We pick up", text: "Rush orders are picked up and delivered within 60 to 90 minutes. Same Day by end of day." },
-  { title: "Delivered, with proof", text: "You get an email with a photo, the time and the name of the person who received it." },
+  { title: "Delivered on time", text: "Straight to your recipient, within the time you booked." },
 ];
 
 export function HowItWorks() {
@@ -144,7 +144,6 @@ export const reasons = [
   "On time, every time",
   "10 years of experience",
   "Air-conditioned van, so items stay cool in the Las Vegas heat",
-  "Photo proof of every delivery",
   "Licensed & insured",
   "No waiting-time fees",
   "After-hours and weekend service",

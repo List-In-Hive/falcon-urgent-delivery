@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           <li>Your name, company, email address and phone number.</li>
           <li>Pickup and drop-off addresses, and the names and phone numbers of the people at each end.</li>
           <li>Descriptions of the items you send and any declared value.</li>
-          <li>Delivery records: pickup and delivery times, the name of the person who received the item, and a photo of the delivered item.</li>
+          <li>Delivery records: pickup and delivery times and the name of the person who received the item.</li>
           <li>Messages you send us through our forms or by email.</li>
           <li>Basic technical data our hosting provider records automatically, such as IP address, browser type and pages visited.</li>
         </ul>
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
         <h2>How we use your information</h2>
         <ul>
           <li>To price, book and complete your deliveries.</li>
-          <li>To send receipts, delivery updates and proof of delivery.</li>
+          <li>To send receipts and delivery updates.</li>
           <li>To answer your questions and quote requests.</li>
           <li>To prevent fraud and keep our service secure.</li>
           <li>To meet our legal, tax and accounting obligations.</li>
@@ -48,21 +48,20 @@ export default function PrivacyPage() {
 
         <h2>Who we share it with</h2>
         <p>
-          We share information only with service providers that help us run the business: Stripe (payments), Netlify (website hosting, forms
-          and storage) and Resend (email delivery). They may use it only to provide their services to us. We may also disclose information
+          We share information only with service providers that help us run the business: Stripe (payments) and Netlify (website hosting
+          and forms). They may use it only to provide their services to us. We may also disclose information
           when the law requires it. <strong>We do not sell your personal information.</strong>
         </p>
 
         <h2>Cookies and tracking</h2>
         <p>
-          Our website uses only cookies that are needed for it to work, such as the sign-in cookie on our driver page. We do not use
-          advertising cookies. Third parties are not allowed to collect information about your online activities over time and across
+          Our website does not use advertising or tracking cookies. Third parties are not allowed to collect information about your online activities over time and across
           different websites through our site.
         </p>
 
         <h2>How long we keep it</h2>
         <p>
-          We keep order records and delivery photos for 12 months, then delete them. Payment records are kept for as long as tax law
+          We keep order records for 12 months, then delete them. Payment records are kept for as long as tax law
           requires.
         </p>
 

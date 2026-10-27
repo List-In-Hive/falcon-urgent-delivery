@@ -13,14 +13,6 @@ const nextConfig: NextConfig = {
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
         ],
       },
-      {
-        source: "/driver/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
-      {
-        source: "/driver",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
     ];
   },
 };
