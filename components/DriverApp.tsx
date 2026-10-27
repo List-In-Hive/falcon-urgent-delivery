@@ -139,7 +139,7 @@ function OrderCard({ order, onChange }: { order: Order; onChange: (o: Order, war
         {order.status === "awaiting_payment" && (
           <p className="flex gap-2 rounded-md bg-red/10 p-3 text-red-dark">
             <TriangleAlert aria-hidden className="shrink-0" size={20} />
-            Payment isn&apos;t confirmed. Check Stripe for this Order ID before you pick up.
+            Payment isn&apos;t confirmed. Check Stripe for a payment from this customer before you pick up.
           </p>
         )}
         <div>

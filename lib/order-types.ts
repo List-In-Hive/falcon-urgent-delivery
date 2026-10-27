@@ -29,7 +29,6 @@ export interface Order {
   itemDescription: string;
   declaredValue: number | null;
   customer: { name: string; company: string; email: string; phone: string };
-  stripeSessionId?: string;
   paidAt?: string;
   pickedUpAt?: string;
   deliveredAt?: string;

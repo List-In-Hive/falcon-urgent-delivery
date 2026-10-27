@@ -2,9 +2,9 @@
 
 Next.js site for Falcon Urgent Delivery (Las Vegas rush courier), built by Inspirovate Creatives.
 
-- **Pages:** Home, About, Services & Pricing, Testimonials, Blog, Contact (including quote requests), Order (price calculator, pay with Stripe), Privacy Policy, Terms of Use, 404.
+- **Pages:** Home, About, Services & Pricing, Testimonials, Blog, Contact (including quote requests), Order (price calculator, pay by Stripe payment link), Privacy Policy, Terms of Use, 404.
 - **Driver page:** `/driver`, PIN-protected and not indexed. The driver marks orders picked up and delivered, and the customer gets an email with a photo.
-- **Stack:** Next.js 16 (App Router, TypeScript), Tailwind CSS 4, Netlify Forms, Stripe Checkout, Netlify Blobs, Resend.
+- **Stack:** Next.js 16 (App Router, TypeScript), Tailwind CSS 4, Netlify Forms, Stripe Payment Links, Netlify Blobs, Resend.
 
 ## Run it locally
 
@@ -19,7 +19,7 @@ Locally, without Netlify:
 - **Forms:** submissions are logged in the browser console instead of sent.
 - **Orders and photos:** saved in `./.data/`, which git ignores.
 - **Emails:** skipped and logged in the terminal unless `RESEND_API_KEY` is set.
-- **Pay Now:** shows "Online payment isn't set up yet" until `STRIPE_SECRET_KEY` is set. Use a Stripe **test** key (`sk_test_…`).
+- **Pay Now:** opens Falcon's live Stripe payment link for that price. Don't complete a payment while testing unless you mean to.
 - **Driver page:** set `DRIVER_PIN` and `DRIVER_SESSION_SECRET` in `.env.local` to try it.
 
 Other commands: `npm run build` (production build, runs the blog manifest first), `npm run lint` and `npm run typecheck`.
@@ -28,14 +28,14 @@ Other commands: `npm run build` (production build, runs the blog manifest first)
 
 1. Push this folder to a Git repo and create a Netlify site from it. Alternatively, run `netlify deploy --build` with the Netlify CLI. Netlify detects Next.js automatically; `netlify.toml` sets the build command and Node 22.
 2. In **Site configuration > Environment variables**, add the values from `.env.example`.
-3. **Forms:** turn on form detection, then deploy. Netlify should list two forms: `order` and `contact`. Under **Forms > Submission notifications**, add an email notification to `info@falconurgentdelivery.com`. One notification for "any form" covers both; add one per form if they should go to different people.
+3. **Forms:** turn on form detection, then deploy. Netlify should list two forms: `order` and `contact`. Under **Forms > Submission notifications**, add an email notification to `wahi.kachichyan@gmail.com`. One notification for "any form" covers both; add one per form if they should go to different people.
 4. **Domain:** add `www.falconurgentdelivery.com` as the primary domain, so the bare domain redirects to www. The client points DNS to Netlify.
 
 ### The two forms
 
 | Form | Page | What it is | Email subject |
 | --- | --- | --- | --- |
-| `order` | `/order` | Paid bookings only. Sent when the customer clicks Pay, just before Stripe, with the Order ID | "New order FUD-…: $59, awaiting payment" |
+| `order` | `/order` | Paid bookings only. Sent when the customer clicks Pay, just before the Stripe payment link opens, with the Order ID | "New order FUD-…: $59, awaiting payment" |
 | `contact` | `/contact` | Messages and quote requests. Choosing the topic "Request a quote" changes the subject | "New quote request from …" or "New contact message" |
 
 Deliveries that need a quote (over 50 lb, over 25 miles, several items, after hours, declared value over $100) can't be paid on `/order`. Its button opens `/contact?topic=quote` with the topic selected and the customer's choices filled into the message. Every "Request a Quote" button on the site uses the same link.
@@ -46,16 +46,18 @@ Both forms have a field named `email`, so hitting **Reply** on a Netlify notific
 
 Netlify ignores form attributes inside Next.js pages. Forms are registered by the static file `public/__forms.html`, and the site POSTs submissions to `/__forms.html` (see `lib/netlify-forms.ts`). **If you add or rename a form field, update `public/__forms.html` too**, or Netlify drops that field. Reference: <https://opennext.js.org/netlify/forms>.
 
-## Stripe
+## Stripe (payment links)
 
-- The price is always recalculated on the server from `lib/pricing.ts`; the browser's price is display only.
-- `/api/checkout` saves the order, creates a Checkout Session with the Order ID in the metadata and payment description, and redirects. `/order/success` confirms the payment with Stripe and marks the order paid.
-- In the Stripe Dashboard:
-  - Turn on **customer email receipts for successful payments**.
-  - Turn on **email notifications for successful payments** for Falcon's account.
-- **Dispatch rule:** the Netlify "order" email arrives first, with status "awaiting payment". Dispatch only after Stripe's payment email for that Order ID.
-- **Quotes:** reply with a Stripe **Payment Link** made in the Dashboard. After it's paid, create a manual order on `/driver`, so the customer still gets photo proof.
-- Test the whole flow in test mode (card `4242 4242 4242 4242`) before switching to live keys.
+Payments use Stripe Payment Links from Falcon's own Stripe account. There are no Stripe keys in the website or in Netlify.
+
+- **6 links, one per price** ($39, $49, $59, $69, $79, $89), all named "Courier Delivery". They are in `lib/payment-links.ts`. The build fails if any price in `lib/pricing.ts` has no link.
+- `/api/checkout` recalculates the price on the server, saves the order and returns the link for that price. The browser's price is display only.
+- The link opens with the customer's email filled in and the Order ID attached as `client_reference_id`.
+- In each link's settings, **After the payment** redirects to `https://www.falconurgentdelivery.com/order/success`. That page thanks the customer and shows their Order ID.
+- **Dispatch rule:** the Netlify "order" email arrives first, with status "awaiting payment". Dispatch only after Stripe's payment email, matched by the customer's email and the amount.
+- **New price?** Falcon creates a link in Stripe; add it to `lib/payment-links.ts`.
+- **Quotes:** Falcon makes a one-time payment link per quote in the Stripe Dashboard. After it's paid, create a manual order on `/driver` so the customer still gets photo proof.
+- In the Stripe Dashboard, turn on customer receipts for successful payments and refunds, and email notifications for successful payments.
 
 ## Proof-of-delivery emails (Resend)
 
@@ -143,9 +145,10 @@ The Testimonials section stays hidden on the home page until a quote is added. E
 - [ ] After-hours, weekend and holiday surcharge (until then, these are quote only)
 - [x] Testimonial quotes from Arman, Luis and Rebecca (in `lib/content.ts`; confirm each person approved the wording)
 - [ ] Whether lab specimens are accepted: "hazardous materials" is prohibited, so the Terms need a clear exception if they are
-- [ ] Client's Stripe account, plus keys in Netlify
+- [x] Client's Stripe account and the 6 payment links (in `lib/payment-links.ts`)
 - [ ] Resend account, plus SPF and DKIM records on the domain
-- [ ] Domain DNS pointed to Netlify, and the info@ mailbox working
+- [x] Domain DNS pointed to Netlify (GoDaddy)
+- [ ] SSL certificate for falconurgentdelivery.com and www (Netlify: Domain management > HTTPS)
 - [ ] Driver PIN, and a random `DRIVER_SESSION_SECRET`
 - [ ] Client approval of the policies and an attorney review of the Privacy Policy and Terms of Use
 - [ ] Owner bio wording on the About page
@@ -154,11 +157,11 @@ The Testimonials section stays hidden on the home page until a quote is added. E
 
 ```text
 app/                pages, API routes (app/api), sitemap, robots, manifest, icons, fonts
-  api/checkout      server pricing, Order ID, Stripe Checkout
+  api/checkout      server pricing, Order ID, picks the Stripe payment link
   api/driver/*      driver login, order lookup, picked up / delivered, manual orders
   api/photo/[id]    delivery photos for the emails
 components/         header, footer, price widget, order form, driver app, page sections
-lib/                pricing, validation, storage (Blobs with local fallback), email, Stripe, site copy,
+lib/                pricing, payment links, validation, storage (Blobs with local fallback), email, site copy,
                     blog loader (blog.ts), publication hash (publication.ts), canonical origin (origin.ts)
 content/blog/       blog articles (Markdown)
 scripts/            publication-manifest.ts (runs before every build)

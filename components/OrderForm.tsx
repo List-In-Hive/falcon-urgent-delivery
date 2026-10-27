@@ -22,6 +22,7 @@ import {
 } from "@/lib/pricing";
 import { EMAIL_RE, validPhone, validZip } from "@/lib/validate";
 import { submitNetlifyForm } from "@/lib/netlify-forms";
+import { LAST_ORDER_KEY } from "@/lib/last-order";
 
 type Errors = Record<string, string>;
 type Phase = "editing" | "paying";
@@ -244,9 +245,18 @@ export default function OrderForm() {
           order_id: json.orderId,
           price: `$${json.price}`,
           request_type: "Pay now",
-          payment_status: "Awaiting payment (check Stripe before dispatch)",
+          payment_status: "Awaiting payment: dispatch only after Stripe's payment email",
         }),
       ).catch(() => undefined);
+      // The thank-you page shows the Order ID after Stripe sends the customer back.
+      try {
+        sessionStorage.setItem(
+          LAST_ORDER_KEY,
+          JSON.stringify({ id: json.orderId, price: json.price, line: lineItemName(item, speed, distance), speed }),
+        );
+      } catch {
+        // Private mode or storage blocked: the page still works, just without the Order ID.
+      }
       window.location.assign(json.url);
     } catch (err) {
       setProblem(err instanceof Error ? err.message : "Payment couldn't start. Try again in a moment.");

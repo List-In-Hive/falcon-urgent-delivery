@@ -1,7 +1,7 @@
 export const site = {
   name: "Falcon Urgent Delivery",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.falconurgentdelivery.com").replace(/\/$/, ""),
-  email: "info@falconurgentdelivery.com",
+  email: "wahi.kachichyan@gmail.com",
   owner: "Wahi Kachichyan",
   experienceYears: 10,
   // Business hours are not confirmed yet. Set a string like "Mon–Fri, 8 AM–6 PM" to show it in the footer and contact page.
