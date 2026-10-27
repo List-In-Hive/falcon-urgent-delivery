@@ -28,7 +28,7 @@ Other commands: `npm run build` (production build, runs the blog manifest first)
 
 1. Push this folder to a Git repo and create a Netlify site from it. Alternatively, run `netlify deploy --build` with the Netlify CLI. Netlify detects Next.js automatically; `netlify.toml` sets the build command and Node 22.
 2. In **Site configuration > Environment variables**, add the values from `.env.example`.
-3. **Forms:** turn on form detection, then deploy. Netlify should list two forms: `order` and `contact`. Under **Forms > Submission notifications**, add an email notification to `wahi.kachichyan@gmail.com`. One notification for "any form" covers both; add one per form if they should go to different people.
+3. **Forms:** turn on form detection, then deploy. Netlify should list two forms: `order` and `contact`. Under **Forms > Submission notifications**, add an email notification to `info@falconurgentdelivery.com`. One notification for "any form" covers both; add one per form if they should go to different people.
 4. **Domain:** add `www.falconurgentdelivery.com` as the primary domain, so the bare domain redirects to www. The client points DNS to Netlify.
 
 ### The two forms
