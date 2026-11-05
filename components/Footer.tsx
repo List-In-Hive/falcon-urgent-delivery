@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
-import { site } from "@/lib/site";
+import { Mail, Phone, ShieldCheck } from "lucide-react";
+import { OUT_OF_STATE_HREF, site } from "@/lib/site";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-navy text-white/80 pb-24 sm:pb-0">
-      <div className="container-x grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.25fr_1.25fr_1fr_1fr]">
         <div>
           <img src="/brand/falcon-logo-reversed.svg" alt="Falcon Urgent Delivery" width={190} height={54} className="h-12 w-auto" />
           <p className="mt-4 max-w-xs text-white/70">Rush and same-day courier for Las Vegas businesses.</p>
@@ -19,8 +19,22 @@ export default function Footer() {
           <h2 className="font-display text-xl text-white">Contact</h2>
           <ul className="mt-3 space-y-2">
             <li>
-              <a href={`mailto:${site.email}`} className="hover:text-white underline-offset-4 hover:underline">
-                {site.email}
+              <a
+                href={site.phoneHref}
+                className="inline-flex items-center gap-2 text-lg font-semibold text-white tabular-nums underline-offset-4 hover:underline"
+              >
+                <Phone aria-hidden size={18} className="text-red" />
+                {site.phone}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 hover:text-white underline-offset-4 hover:underline">
+                <Mail aria-hidden size={18} className="shrink-0 text-red" />
+                {/* Lets a narrow column break the address after the @, never mid-word */}
+                <span>
+                  {site.email.split("@")[0]}@<wbr />
+                  {site.email.split("@")[1]}
+                </span>
               </a>
             </li>
             {site.hours && <li>{site.hours}</li>}
@@ -39,6 +53,12 @@ export default function Footer() {
               <li key={a}>{a}</li>
             ))}
           </ul>
+          <p className="mt-4 border-t border-white/10 pt-4">
+            <span className="block font-semibold text-white">Out of state</span>
+            <Link href={OUT_OF_STATE_HREF} className="underline-offset-4 hover:text-white hover:underline">
+              California &amp; Arizona, by quote
+            </Link>
+          </p>
         </div>
 
         <div>
@@ -48,6 +68,7 @@ export default function Footer() {
               ["/services", "Services & pricing"],
               ["/order", "Book a delivery"],
               ["/contact?topic=quote", "Request a quote"],
+              [OUT_OF_STATE_HREF, "Out-of-state quote"],
               ["/about", "About"],
               ["/blog", "Blog"],
               ["/privacy", "Privacy Policy"],

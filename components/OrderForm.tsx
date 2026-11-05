@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
+import { site } from "@/lib/site";
 import {
   DISTANCE_LABELS,
   INCLUDED_VALUE,
@@ -310,6 +311,12 @@ export default function OrderForm() {
           </>
         )}
       </div>
+      <p className="mt-5 border-t border-white/10 pt-4 text-center text-sm text-white/70">
+        Questions? Call{" "}
+        <a href={site.phoneHref} className="font-semibold text-white tabular-nums underline underline-offset-4">
+          {site.phone}
+        </a>
+      </p>
     </div>
   );
 

@@ -5,7 +5,7 @@ export const serviceSchema = {
   "@type": "Service",
   serviceType: "Courier service",
   name: "Rush and same-day courier delivery",
-  provider: { "@type": "Organization", name: site.name, url: site.url },
+  provider: { "@type": "Organization", name: site.name, url: site.url, telephone: site.phoneE164 },
   areaServed: [
     { "@type": "City", name: "Las Vegas" },
     { "@type": "City", name: "Henderson" },

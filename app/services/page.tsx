@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import Faq from "@/components/Faq";
-import { CtaBand, Industries, PageHero, PriceTable, ProhibitedList, SectionHeading, ServicesList } from "@/components/sections";
+import {
+  CtaBand,
+  Industries,
+  OutOfStateBand,
+  PageHero,
+  PriceTable,
+  ProhibitedList,
+  SectionHeading,
+  ServicesList,
+} from "@/components/sections";
 import { serviceSchema } from "@/lib/schema";
 import { INCLUDED_VALUE } from "@/lib/pricing";
 
@@ -51,7 +60,7 @@ export default function ServicesPage() {
               <dt className="font-semibold">By quote</dt>
               <dd className="text-[#2b3a4a]">
                 Over 50 lb or oversized, over 25 miles, more than one item, several stops or round trips, after-hours, weekend and
-                holiday deliveries, and declared values over ${INCLUDED_VALUE}.
+                holiday deliveries, declared values over ${INCLUDED_VALUE}, and out-of-state deliveries to California and Arizona.
               </dd>
             </div>
             <div>
@@ -61,6 +70,8 @@ export default function ServicesPage() {
           </dl>
         </div>
       </section>
+
+      <OutOfStateBand className="pt-16 md:pt-24" />
 
       <section className="py-16 md:py-24" aria-labelledby="carry-title">
         <div className="container-x">

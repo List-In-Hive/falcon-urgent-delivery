@@ -3,6 +3,7 @@ import {
   Check,
   FileText,
   FlaskConical,
+  Phone,
   Pill,
   Scale,
   Smile,
@@ -11,7 +12,7 @@ import {
 } from "lucide-react";
 import { industries, publishedTestimonials } from "@/lib/content";
 import { DISTANCE_LABELS, ITEM_LABELS, PRICES } from "@/lib/pricing";
-import { prohibitedItems } from "@/lib/site";
+import { OUT_OF_STATE_HREF, prohibitedItems, site } from "@/lib/site";
 
 export function PageHero({ title, intro, children }: { title: string; intro?: string; children?: React.ReactNode }) {
   return (
@@ -203,6 +204,12 @@ export function CtaBand({ title = "Need it there in the next 90 minutes?", text 
         <div>
           <h2 className="text-4xl md:text-5xl">{title}</h2>
           {text && <p className="mt-3 max-w-xl text-white/90">{text}</p>}
+          <p className="mt-3 text-lg text-white/90">
+            Or call{" "}
+            <a href={site.phoneHref} className="font-semibold text-white tabular-nums underline underline-offset-4 hover:no-underline">
+              {site.phone}
+            </a>
+          </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link href="/order" className="btn bg-navy text-white hover:bg-navy-2">
@@ -211,6 +218,69 @@ export function CtaBand({ title = "Need it there in the next 90 minutes?", text 
           <Link href="/contact?topic=quote" className="btn btn-ghost-light">
             Request a Quote
           </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Las Vegas → California / Arizona route sketch for the out-of-state section. */
+function OutOfStateRoute() {
+  return (
+    <svg viewBox="0 0 420 270" role="img" aria-label="Routes from Las Vegas, Nevada to California and Arizona" className="h-auto w-full max-w-md">
+      <path d="M210 70 C 160 110, 110 140, 80 196" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+      <path d="M210 70 C 260 110, 310 140, 340 196" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+      <g>
+        <circle cx="210" cy="62" r="30" fill="#d22b24" />
+        <circle cx="210" cy="62" r="11" fill="#fff" />
+        <text x="252" y="54" fill="#fff" fontFamily="var(--font-display)" fontWeight="800" fontSize="24">LAS VEGAS</text>
+        <text x="252" y="78" fill="#fff" fillOpacity="0.6" fontFamily="var(--font-sans)" fontWeight="600" fontSize="16">Nevada</text>
+      </g>
+      {[
+        { x: 80, label: "CALIFORNIA" },
+        { x: 340, label: "ARIZONA" },
+      ].map((p) => (
+        <g key={p.label}>
+          <circle cx={p.x} cy="204" r="22" fill="#fff" />
+          <circle cx={p.x} cy="204" r="8" fill="#0d1b2a" />
+          <text x={p.x} y="256" textAnchor="middle" fill="#fff" fontFamily="var(--font-display)" fontWeight="800" fontSize="22" letterSpacing="1">
+            {p.label}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/** Special out-of-state deliveries (California and Arizona), priced by quote. */
+export function OutOfStateBand({ className = "py-16 md:py-24" }: { className?: string }) {
+  return (
+    <section className={className} aria-labelledby="out-of-state-title">
+      <div className="container-x">
+        <div className="grid items-center gap-10 overflow-hidden rounded-2xl bg-navy px-6 py-8 text-white sm:p-8 md:p-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
+          <div>
+            <p className="inline-flex items-center gap-2 font-display text-lg font-bold uppercase tracking-[0.12em] text-red">
+              <span aria-hidden className="h-0.5 w-8 bg-red" /> Out-of-state delivery
+            </p>
+            <h2 id="out-of-state-title" className="mt-3 text-4xl md:text-5xl">
+              From Las Vegas to California and Arizona
+            </h2>
+            <p className="mt-4 max-w-xl text-lg text-white/80">
+              Need it delivered beyond Nevada? We run special out-of-state deliveries to {site.outOfState.join(" and ")}. Every trip is
+              priced by quote, based on the route, the item and when it needs to arrive.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href={OUT_OF_STATE_HREF} className="btn btn-red">
+                Request an Out-of-State Quote
+              </Link>
+              <a href={site.phoneHref} className="btn btn-ghost-light">
+                <Phone aria-hidden size={19} /> Call {site.phone}
+              </a>
+            </div>
+          </div>
+          <div className="justify-self-center lg:justify-self-end">
+            <OutOfStateRoute />
+          </div>
         </div>
       </div>
     </section>

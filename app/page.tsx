@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, ShieldCheck, Snowflake, Timer } from "lucide-react";
+import { Clock, Phone, ShieldCheck, Snowflake, Timer } from "lucide-react";
 import PriceWidget from "@/components/PriceWidget";
 import VanIllustration from "@/components/VanIllustration";
 import ServiceAreaMap from "@/components/ServiceAreaMap";
@@ -10,6 +10,7 @@ import {
   CtaBand,
   HowItWorks,
   Industries,
+  OutOfStateBand,
   SectionHeading,
   ServicesList,
   TestimonialsGrid,
@@ -55,6 +56,15 @@ export default function Home() {
                 Request a Quote
               </Link>
             </div>
+            <p className="mt-5 flex items-center gap-2.5 text-lg text-white/80">
+              <Phone aria-hidden size={20} className="shrink-0 text-red" />
+              <span>
+                Prefer to talk? Call{" "}
+                <a href={site.phoneHref} className="font-semibold text-white tabular-nums underline underline-offset-4 hover:no-underline">
+                  {site.phone}
+                </a>
+              </span>
+            </p>
             <ul className="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-3 text-white/90">
               {trust.map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-center gap-2.5">
@@ -123,7 +133,9 @@ export default function Home() {
             <h2 id="area-title" className="text-4xl md:text-5xl">
               Across the Las Vegas valley
             </h2>
-            <p className="mt-4 text-lg text-slate">Up to 25 miles per trip. Longer runs by quote.</p>
+            <p className="mt-4 text-lg text-slate">
+              Up to 25 miles per trip. Longer runs, and special out-of-state deliveries to California and Arizona, by quote.
+            </p>
             <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 text-lg">
               {site.areas.map((a) => (
                 <li key={a} className="flex items-center gap-3">
@@ -136,6 +148,9 @@ export default function Home() {
           <ServiceAreaMap />
         </div>
       </section>
+
+      {/* Out-of-state: California & Arizona */}
+      <OutOfStateBand className="pb-16 md:pb-24" />
 
       {/* Testimonials (shown once real quotes are added in lib/content.ts) */}
       {publishedTestimonials.length > 0 && (

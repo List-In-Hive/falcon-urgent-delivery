@@ -31,7 +31,10 @@ export default function TermsPage() {
           <li>
             <strong>Same Day:</strong> ordered by 2 PM and delivered by the end of the business day.
           </li>
-          <li>Our service area covers trips of up to 25 miles in the Las Vegas valley. Anything else is priced by quote.</li>
+          <li>
+            Our service area covers trips of up to 25 miles in the Las Vegas valley. Anything else is priced by quote, including special
+            out-of-state deliveries to California and Arizona.
+          </li>
         </ul>
 
         <h2>3. Booking and prices</h2>
@@ -58,7 +61,8 @@ export default function TermsPage() {
           <li>Once your item has been picked up, the delivery cannot be refunded.</li>
           <li>Refunds go back to the original card through Stripe. Your bank may take a few business days to show it.</li>
           <li>
-            To cancel, email <a href={`mailto:${site.email}`}>{site.email}</a> with your Order ID.
+            To cancel, call <a href={site.phoneHref}>{site.phone}</a> or email <a href={`mailto:${site.email}`}>{site.email}</a> with your
+            Order ID.
           </li>
         </ul>
 
@@ -122,7 +126,8 @@ export default function TermsPage() {
         <h2>15. Changes and contact</h2>
         <p>
           We may update these terms. The version on this page applies to bookings made while it is posted. Questions go to{" "}
-          <a href={`mailto:${site.email}`}>{site.email}</a>. See also our <Link href="/privacy">Privacy Policy</Link>.
+          <a href={`mailto:${site.email}`}>{site.email}</a> or <a href={site.phoneHref}>{site.phone}</a>. See also our{" "}
+          <Link href="/privacy">Privacy Policy</Link>.
         </p>
       </article>
     </>

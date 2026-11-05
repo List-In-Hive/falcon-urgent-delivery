@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import VanIllustration from "@/components/VanIllustration";
 import { CheckList, CtaBand, PageHero } from "@/components/sections";
-import { site } from "@/lib/site";
+import { OUT_OF_STATE_HREF, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: "About Us | Falcon Urgent Delivery, Las Vegas Courier" },
@@ -67,11 +67,15 @@ export default function AboutPage() {
               Where we work
             </h2>
             <p className="mt-4 text-lg text-slate">
-              {site.areas.join(", ")}. Up to 25 miles per trip, and longer runs by quote.
+              {site.areas.join(", ")}. Up to 25 miles per trip, and longer runs by quote. We also make special out-of-state deliveries to
+              California and Arizona, priced by quote.
             </p>
-            <p className="mt-6">
+            <p className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
               <Link href="/services" className="font-semibold text-red underline underline-offset-4">
                 See services and prices
+              </Link>
+              <Link href={OUT_OF_STATE_HREF} className="font-semibold text-red underline underline-offset-4">
+                Request an out-of-state quote
               </Link>
             </p>
           </div>

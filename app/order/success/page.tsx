@@ -25,7 +25,11 @@ export default function SuccessPage() {
           <li>Your item goes straight to the recipient at the drop-off address.</li>
         </ol>
         <p className="mt-4 text-slate">
-          Stripe has emailed your receipt. Need to change something? Email{" "}
+          Stripe has emailed your receipt. Need to change something? Call{" "}
+          <a href={site.phoneHref} className="text-red underline tabular-nums">
+            {site.phone}
+          </a>{" "}
+          or email{" "}
           <a href={`mailto:${site.email}`} className="text-red underline">
             {site.email}
           </a>{" "}

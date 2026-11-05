@@ -56,7 +56,23 @@ const orgSchema = {
   url: site.url,
   logo: `${site.url}/android-chrome-512.png`,
   email: site.email,
-  areaServed: ["Las Vegas, NV", "Henderson, NV", "Summerlin, NV", "North Las Vegas, NV", "Boulder City, NV"],
+  telephone: site.phoneE164,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    telephone: site.phoneE164,
+    email: site.email,
+    areaServed: "US",
+    availableLanguage: "English",
+  },
+  areaServed: [
+    "Las Vegas, NV",
+    "Henderson, NV",
+    "Summerlin, NV",
+    "North Las Vegas, NV",
+    "Boulder City, NV",
+    ...site.outOfState.map((name) => ({ "@type": "State", name })),
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

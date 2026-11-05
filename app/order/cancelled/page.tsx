@@ -21,7 +21,11 @@ export default function CancelledPage() {
         </Link>
       </div>
       <p className="mt-8 text-slate">
-        Having trouble paying? Email{" "}
+        Having trouble paying? Call{" "}
+        <a href={site.phoneHref} className="text-red underline tabular-nums">
+          {site.phone}
+        </a>{" "}
+        or email{" "}
         <a href={`mailto:${site.email}`} className="text-red underline">
           {site.email}
         </a>

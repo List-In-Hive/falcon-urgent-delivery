@@ -1,4 +1,5 @@
 // Site copy that appears on more than one page.
+import { site } from "./site";
 
 export const faqs: { q: string; a: string }[] = [
   {
@@ -19,7 +20,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What areas do you serve?",
-    a: "Las Vegas, Henderson, Summerlin, North Las Vegas, Boulder City and the airport area, up to 25 miles per trip. Longer runs by quote.",
+    a: "Las Vegas, Henderson, Summerlin, North Las Vegas, Boulder City and the airport area, up to 25 miles per trip. Longer runs by quote, and special out-of-state deliveries to California and Arizona.",
   },
   {
     q: "How do I pay?",
@@ -28,6 +29,10 @@ export const faqs: { q: string; a: string }[] = [
   {
     q: "Do you deliver after hours and on weekends?",
     a: "Yes, including emergencies. Request a quote and we'll confirm the price.",
+  },
+  {
+    q: "Do you deliver outside Nevada?",
+    a: `Yes. We make special out-of-state deliveries from Las Vegas to California and Arizona, priced by quote. Choose "Out-of-state delivery" on our contact form, or call ${site.phone}.`,
   },
   { q: "Do you charge for waiting time?", a: "No." },
   {

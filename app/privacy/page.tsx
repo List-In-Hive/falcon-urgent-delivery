@@ -89,7 +89,8 @@ export default function PrivacyPage() {
 
         <h2>Contact</h2>
         <p>
-          Falcon Urgent Delivery, Las Vegas, Nevada. Email <a href={`mailto:${site.email}`}>{site.email}</a>.
+          Falcon Urgent Delivery, Las Vegas, Nevada. Email <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
+          <a href={site.phoneHref}>{site.phone}</a>.
         </p>
       </article>
     </>

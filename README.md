@@ -32,9 +32,13 @@ Other commands: `npm run build` (production build, runs the blog manifest first)
 | Form | Page | What it is | Email subject |
 | --- | --- | --- | --- |
 | `order` | `/order` | Paid bookings only. Sent when the customer clicks Pay, just before the Stripe payment link opens, with the Order ID | "New order FUD-…: $59, awaiting payment" |
-| `contact` | `/contact` | Messages and quote requests. Choosing the topic "Request a quote" changes the subject | "New quote request from …" or "New contact message" |
+| `contact` | `/contact` | Messages and quote requests. The topics "Request a quote" and "Out-of-state delivery" change the subject | "New quote request from …", "New out-of-state quote request (CA/AZ) from …" or "New contact message" |
 
 Deliveries that need a quote (over 50 lb, over 25 miles, several items, after hours, declared value over $100) can't be paid on `/order`. Its button opens `/contact?topic=quote` with the topic selected and the customer's choices filled into the message. Every "Request a Quote" button on the site uses the same link.
+
+Out-of-state deliveries (California and Arizona) are always by quote. Every "Out-of-state quote" button opens `/contact?topic=out-of-state`, which selects that topic and shows the route fields hint.
+
+The phone number, `(702) 704-4430`, is set once in `lib/site.ts` (`phone`, `phoneHref`) and used in the header, the phone bottom bar, the footer, the contact page, the CTA bands and the structured data.
 
 Both forms have a field named `email`, so hitting **Reply** on a Netlify notification answers the customer directly.
 

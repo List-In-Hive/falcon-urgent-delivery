@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import OrderForm from "@/components/OrderForm";
+import { OUT_OF_STATE_HREF, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: "Get a Price & Book a Courier | Falcon Urgent Delivery" },
@@ -20,7 +21,17 @@ export default function OrderPage() {
             <Link href="/contact?topic=quote" className="text-white underline underline-offset-4">
               Request a quote
             </Link>{" "}
-            instead.
+            instead. Going to California or Arizona?{" "}
+            <Link href={OUT_OF_STATE_HREF} className="text-white underline underline-offset-4">
+              Get an out-of-state quote
+            </Link>
+            .
+          </p>
+          <p className="mt-3 text-lg text-white/80">
+            Questions? Call{" "}
+            <a href={site.phoneHref} className="font-semibold text-white tabular-nums underline underline-offset-4">
+              {site.phone}
+            </a>
           </p>
         </div>
       </section>
