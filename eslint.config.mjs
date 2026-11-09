@@ -11,7 +11,8 @@ const eslintConfig = defineConfig([
       "@next/next/no-img-element": "off",
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".netlify/**"]),
+  // scripts/blog-images is a separate Node tool with its own packages (see BLOG_AUTOMATION.md).
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".netlify/**", "scripts/blog-images/**"]),
 ]);
 
 export default eslintConfig;

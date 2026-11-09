@@ -1,0 +1,12 @@
+{
+  "name": "falcon-blog-images",
+  "private": true,
+  "description": "Draws the flat illustrations for Falcon blog articles and saves them as WebP in public/images. See BLOG_AUTOMATION.md.",
+  "dependencies": {
+    "@fontsource/barlow": "5.1.0",
+    "@fontsource/barlow-condensed": "5.1.0",
+    "@resvg/resvg-js": "2.6.2",
+    "opentype.js": "1.3.4",
+    "sharp": "0.35.5"
+  }
+}

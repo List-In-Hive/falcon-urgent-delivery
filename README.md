@@ -97,6 +97,8 @@ Rules:
 - **Related articles:** each article page shows the 2–3 newest other articles.
 - **Sample:** `content/blog/sample-article-format.md` is a clearly marked sample with `status: "draft"`, so it never appears on the site.
 
+**Scheduled articles:** a scheduled run writes and publishes a new article on the 10th, 20th and 28th of each month. Its full instructions are in `BLOG_AUTOMATION.md`, the topics it has covered are in `content/blog-topics.md`, and its images are drawn by `scripts/blog-images/` (one script per article in `scripts/blog-images/articles/`). To steer the next article, add a line under "Requested topics" in `content/blog-topics.md`.
+
 **Publication hash and manifest:**
 
 - `npm run build` first runs `prebuild`, which writes `public/publication-manifest.json` with each public article's slug and hash (`lib/publication.ts`).
@@ -143,7 +145,7 @@ components/         header, footer, price widget, order form, page sections
 lib/                pricing, payment links, validation, site copy,
                     blog loader (blog.ts), publication hash (publication.ts), canonical origin (origin.ts)
 content/blog/       blog articles (Markdown)
-scripts/            publication-manifest.ts (runs before every build)
+scripts/            publication-manifest.ts (runs before every build); blog-images/ draws blog illustrations
 public/__forms.html Netlify Forms registration (keep in sync with the forms)
 public/brand/       logo files
 public/images/      blog images (WebP)
