@@ -28,7 +28,7 @@ npm ci --prefix scripts/blog-images
 
 ### 2. Check this run hasn't already published
 
-Read `content/blog-topics.md`. If the Published table already has a row with today's date (Los Angeles time), stop and report "Already published today". This keeps a repeated run from posting twice.
+Get today's date in Los Angeles with `TZ=America/Los_Angeles date +%Y-%m-%d`. Read `content/blog-topics.md`. If the Published table already has a row with that date, stop and report "Already published today". This keeps a repeated run from posting twice.
 
 ### 3. Review the blog
 
@@ -38,7 +38,7 @@ Read `content/blog-topics.md`. If the Published table already has a row with tod
 
 ### 4. Pick the topic
 
-1. If **Requested topics** in `content/blog-topics.md` has an item, use the first one.
+1. If **Requested topics** in `content/blog-topics.md` lists a topic (anything other than "(none)"), use the first one.
 2. Otherwise choose a new topic from **Topic directions** below that no published article covers. Different angle, different main search phrase, no overlap with an existing title.
 3. Prefer the topic most useful right now: seasonal timing (for example the holiday rush in November and December, summer heat in June to August), then industries not yet covered, then how-to guides.
 
@@ -123,7 +123,7 @@ node scripts/blog-images/articles/SLUG.js
 
 ### 8. Update the topics log
 
-In `content/blog-topics.md`, add a row to **Published**: date (Los Angeles time), slug, topic and main search phrase. If you used a requested topic, remove it from **Requested topics**.
+In `content/blog-topics.md`, add a row at the bottom of **Published**: today's Los Angeles date (`TZ=America/Los_Angeles date +%Y-%m-%d`), slug, topic and main search phrase. If you used a requested topic, remove its line from **Requested topics**, and if the list is then empty, put back the single line `- (none)`.
 
 ### 9. Check everything
 
@@ -134,7 +134,7 @@ npm run build
 ```
 
 - All three must pass. The build fails on a bad front matter field, a duplicate slug, an empty body or a missing image.
-- The build output must list `/blog/SLUG`.
+- The article page must exist after the build: `ls .next/server/app/blog/SLUG.html`. (The build log stops listing every article once there are many, so check the file, not the log.)
 - Re-read the article once against the facts files: every price, time, weight, area and policy must match. Check every internal link is on the allowed list and every `/blog/…` link points to an existing published article.
 - `git status` must show only the files allowed above.
 
